@@ -1,0 +1,68 @@
+<div class="content" role="main">
+    <h1>Products</h1>
+    <button type="button" (click)="CountCategory()" class="btn btn-danger">CountCategory</button>
+    <button type="button" (click)="MaxDiscount()" class="btn btn-danger">MaxDiscount</button>
+    <button type="button" (click)="PriceLevel()" class="btn btn-danger">PriceLevel</button>
+    <div id="displayProductInfo" class="alert alert-primary" role="alert" [attr.data-element-dismissable]="hideProductInfo">
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-11">
+            Description: {{ selectedProduct.description }}
+          </div>
+          <div class="col-1">
+            <button (click)="switchProductInfoValue()" id="closeProductInfo" type="button" class="btn btn-danger" >X</button>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col" *ngFor="let image of selectedProduct.images">
+              <img cImg [src]='image' height="80" width="80"/>
+          </div>
+        </div>
+        
+        <div *ngFor="let comment of selectedComments" class="row mb-3">
+          <div class="col-2">
+              {{ comment.id }}
+          </div>
+          <div class="col-2">
+              {{ comment.user.username }}
+          </div>
+          <div class="col-8">
+              <textarea [(ngModel)]="comment.body" [value]="comment.body" class="container-fluid">
+              </textarea>
+          </div>
+      </div>
+      </div>
+    </div>
+      
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col"></th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Discount Percentage</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of products" [class]="styleBinding(item)">
+          <td>{{item.id}} </td>
+          <td><img cImg height="50" rounded [src]='item.thumbnail' width="50" class="text-center"/></td>
+          <td>{{item.title}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.discountPercentage}}</td>
+          <td>{{item.rating}}</td>
+          <td>{{item.stock}}</td>
+          <td>{{item.brand}}</td>
+          <td>{{item.category}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteProduct(item)">DEL</button></td>
+          <td><button type="button" class="btn btn-info" (click)="displayMoreProductInfo(item)">MORE</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<router-outlet></router-outlet>

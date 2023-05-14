@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+#displayProductInfo[data-element-dismissable="true"]{
+    visibility: hidden;
+    display: none;
+}
+#displayProductInfo[data-element-dismissable="false"]{
+    visibility: visible;
+    display: block;
+}
